@@ -1,0 +1,30 @@
+<html>
+<body>
+<h2>Masukkan data</h2>
+<form action="tambah_komentar.php" method="POST">
+nim <input type="text" name="nim"><br>
+nama <input type="text" name="nama"><br>
+Tujuan
+<select name="id_tujuan" id="id_tujuan">
+<option value="">-- Pilih Tujuan --</option>
+</select><br>
+Komentar <input type="text" name="komentar"><br>
+<input type="submit" value="Simpan">
+</form>
+<script>
+// Ambil data tujuan dari PHP (JSON)
+fetch('get_tujuan.php')
+.then(response => response.json())
+.then(data => {
+let select = document.getElementById('id_tujuan');
+data.forEach(item => {
+let option = document.createElement('option');
+option.value = item.id_tujuan;
+option.text = item.nama_tujuan;
+select.appendChild(option);
+});
+})
+.catch(error => console.error('Gagal mengambil data tujuan:', error));
+</script>
+</body>
+</html>
